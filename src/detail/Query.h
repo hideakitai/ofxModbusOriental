@@ -235,7 +235,7 @@ public:
         setPosition(0);
         setVelocity(0);
         setAcceleration(0);
-        setDeacceleration(0);
+        setDeceleration(0);
         setCurrent(0x03E8);
         setTrigger(1);
     }
@@ -245,7 +245,7 @@ public:
     void setPosition(uint32_t pos) { setValue32(pos_offset, pos); }
     void setVelocity(uint32_t vel) { setValue32(vel_offset, vel); }
     void setAcceleration(uint32_t acc) { setValue32(acc_offset, acc); }
-    void setDeacceleration(uint32_t dec) { setValue32(dec_offset, dec); }
+    void setDeceleration(uint32_t dec) { setValue32(dec_offset, dec); }
     void setCurrent(uint32_t crnt) { setValue32(crnt_offset, crnt); }
     void setTrigger(char trig) { setValue8(trig_offset, (uint8_t)trig); }
 };

@@ -37,7 +37,7 @@ void ofApp::setup(){
     }
     modbus.setMode(0, modbus_init_mode);
     modbus.setAcceleration(0, modbus_init_acc);
-    modbus.setDeacceleration(0, modbus_init_acc);
+    modbus.setDeceleration(0, modbus_init_acc);
     modbus.setCurrent(0, modbus_init_crnt);
     modbus.setVelocity(0, modbus.getVelocityMax());
     modbus.setJogSteps(0, modbus_init_jog_steps);
@@ -183,17 +183,17 @@ void ofApp::keyPressed(int key){
     //        modbus.setPosition(0, next_pos);
     //        modbus.setVelocity(0, modbus_init_vel);
     //        modbus.setAcceleration(0, modbus_init_acc);
-    //        modbus.setDeacceleration(0, modbus_init_acc);
+    //        modbus.setDeceleration(0, modbus_init_acc);
             
             // write buffered values to buffer
-            // position, velocity, acceleration, deacceleration
+            // position, velocity, acceleration, Deceleration
             modbus.write(0);
             
             // or write them manually
     //        modbus.writePosition(0);
     //        modbus.writeVelocity(0);
     //        modbus.writeAcceleration(0);
-    //        modbus.writeDeacceleration(0);
+    //        modbus.writeDeceleration(0);
             
             // start motion depending on the wrote values (pos, vel, acc, dec)
             modbus.start(0);

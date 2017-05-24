@@ -170,7 +170,7 @@ public:
         drive->setPosition(abs_pos);
         drive->setVelocity(vel);
         drive->setAcceleration(acc);
-        drive->setDeacceleration(dec);
+        drive->setDeceleration(dec);
         drive->setCurrent(crnt);
         drive->setTrigger(trig);
 		serial.push_back(std::static_pointer_cast<Query>(drive));
@@ -211,12 +211,12 @@ public:
         else
             buffer.setAcceleration(id, acc);
     }
-    void setDeacceleration(uint8_t id, uint32_t dec)
+    void setDeceleration(uint8_t id, uint32_t dec)
     {
         if (id == 0) for (size_t i = 1; i <= getNumMotors(); ++i)
-            buffer.setDeacceleration(i, dec);
+            buffer.setDeceleration(i, dec);
         else
-            buffer.setDeacceleration(id, dec);
+            buffer.setDeceleration(id, dec);
     }
     void setCurrent(uint8_t id, uint32_t crnt)
     {
@@ -231,7 +231,7 @@ public:
         writePosition(id);
         writeVelocity(id);
         writeAcceleration(id);
-        writeDeacceleration(id);
+        writeDeceleration(id);
     }
 
 	void writePosition(uint8_t id)
@@ -262,9 +262,9 @@ public:
 		serial.push_back(query);
 	}
 
-	void writeDeacceleration(uint8_t id)
+	void writeDeceleration(uint8_t id)
 	{
-		Buffer::DataRef query = buffer.getDeaccelerationRef();
+		Buffer::DataRef query = buffer.getDecelerationRef();
         query->setID(id);
 		serial.push_back(query);
 	}
@@ -367,7 +367,7 @@ private:
         }
         acc = 4.f * avg_vel / time;
         buffer.setAcceleration(id, (uint32_t)std::abs(acc));
-        buffer.setDeacceleration(id, (uint32_t)std::abs(acc));
+        buffer.setDeceleration(id, (uint32_t)std::abs(acc));
         buffer.setVelocity(id, (int32_t)vel); // if needed
         buffer.setPosition(id, pos);
     }
@@ -400,7 +400,7 @@ private:
 ////			float time_const_vel = time - 2.f * vel / target_acc;
 //		}
 //        buffer.setAcceleration(id, target_acc); // if needed
-//        buffer.setDeacceleration(id, target_acc); // if needed
+//        buffer.setDeceleration(id, target_acc); // if needed
 //		buffer.setVelocity(id, (int32_t)vel);
 //		buffer.setPosition(id, target_pos);
 //        cout << "pos = " << target_pos << endl;

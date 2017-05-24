@@ -72,10 +72,10 @@ public:
     }
 };
 
-class ConcurrentDeacceleration : public ConcurrentValue
+class ConcurrentDeceleration : public ConcurrentValue
 {
 public:
-    ConcurrentDeacceleration()
+    ConcurrentDeceleration()
     {
         setID(0x00);
         setFunc(0x10);
@@ -105,7 +105,7 @@ class Buffer
 	std::shared_ptr<ConcurrentVelocity> vel;
 	std::shared_ptr<ConcurrentMode> mode;
 	std::shared_ptr<ConcurrentAcceleration> acc;
-	std::shared_ptr<ConcurrentDeacceleration> dec;
+	std::shared_ptr<ConcurrentDeceleration> dec;
 	std::shared_ptr<ConcurrentCurrent> crnt;
 	
     enum class State { Idle, Pos, Vel, Start, Clear };
@@ -119,7 +119,7 @@ public:
         vel = std::make_shared<ConcurrentVelocity>();
         mode = std::make_shared<ConcurrentMode>();
         acc = std::make_shared<ConcurrentAcceleration>();
-        dec = std::make_shared<ConcurrentDeacceleration>();
+        dec = std::make_shared<ConcurrentDeceleration>();
         crnt = std::make_shared<ConcurrentCurrent>();
     }
     
@@ -129,21 +129,21 @@ public:
     void setVelocity(uint8_t id, int32_t v) { vel->set(id, (uint32_t)v); }
     void setMode(uint8_t id, uint8_t m) { mode->set(id, m); }
     void setAcceleration(uint8_t id, uint32_t a) { acc->set(id, a); }
-    void setDeacceleration(uint8_t id, uint32_t d) { dec->set(id, d); }
+    void setDeceleration(uint8_t id, uint32_t d) { dec->set(id, d); }
     void setCurrent(uint8_t id, uint32_t c) { crnt->set(id, c); }
     
     DataRef getPositionRef() { return pos; }
 	DataRef getVelocityRef() { return vel; }
 	DataRef getModeRef() { return mode; }
 	DataRef getAccelerationRef() { return acc; }
-	DataRef getDeaccelerationRef() { return dec; }
+	DataRef getDecelerationRef() { return dec; }
 	DataRef getCurrentRef() { return crnt; }
     
     int32_t getPosition(uint8_t id) { return (int32_t)pos->at(id); }
 	int32_t getVelocity(uint8_t id) { return (int32_t)vel->at(id); }
 	uint8_t getMode(uint8_t id) { return (uint8_t)mode->at(id); }
 	uint32_t getAcceleration(uint8_t id) { return acc->at(id); }
-	uint32_t getDeacceleration(uint8_t id) { return dec->at(id); }
+	uint32_t getDeceleration(uint8_t id) { return dec->at(id); }
 	uint32_t getCurrent(uint8_t id) { return crnt->at(id); }
     
     size_t size() { return pos->getDriveNoSize(); }
