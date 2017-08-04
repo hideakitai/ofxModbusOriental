@@ -236,6 +236,9 @@ public:
 
 	void writePosition(uint8_t id)
 	{
+        for (size_t i = 0; i < wrote_pos.size(); ++i)
+            wrote_pos[i] = buffer.getPosition(i);
+        
 		Buffer::DataRef query = buffer.getPositionRef();
         query->setID(id);
 		serial.push_back(query);
