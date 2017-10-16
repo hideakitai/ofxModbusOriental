@@ -363,12 +363,14 @@ private:
         if (std::abs(avg_vel) <= 500.f)
         {
             vel = avg_vel;
+            acc = acc_limit;
+            ofLogWarning("low speed : constant speed operation");
         }
         else
         {
             vel = vel_limit_max; // 2.f * avg_vel
+            acc = 4.f * avg_vel / time;
         }
-        acc = 4.f * avg_vel / time;
         buffer.setAcceleration(id, (uint32_t)std::abs(acc));
         buffer.setDeceleration(id, (uint32_t)std::abs(acc));
         buffer.setVelocity(id, (int32_t)vel); // if needed
